@@ -1,5 +1,7 @@
 export const publicRoutes = ["/"];
 
+export const imagesRoutes = "/images";
+
 export const authRoutes = ["/login", "/signup"];
 
 export const resetPasswordRoutes = "/reset-password";

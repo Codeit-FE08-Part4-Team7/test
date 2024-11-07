@@ -5,6 +5,7 @@ import {
   apiAuthPrefix,
   authRoutes,
   DEFAULT_LOGIN_REDIRECT,
+  imagesRoutes,
   publicRoutes,
   resetPasswordRoutes,
 } from "./routes";
@@ -18,11 +19,12 @@ export function middleware(req: NextRequest) {
 
   const isLoggedIn = accessToken?.value;
   const isApiAuth = pathname.startsWith(apiAuthPrefix);
+  const isImagesPath = pathname.startsWith(imagesRoutes);
   const isPasswordResetPath = pathname.startsWith(resetPasswordRoutes);
   const isPublicPath = publicRoutes.includes(pathname);
   const isAuthPath = authRoutes.includes(pathname);
 
-  if (isApiAuth || isPasswordResetPath) return null;
+  if (isApiAuth || isPasswordResetPath || isImagesPath) return null;
   if (isAuthPath) {
     if (isLoggedIn) {
       return Response.redirect(new URL(DEFAULT_LOGIN_REDIRECT, nextUrl));
